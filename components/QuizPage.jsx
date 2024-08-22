@@ -73,18 +73,23 @@ answersArr: [
 export default function QuizPage(props) {
     return (
         <div className = "page-container">
-            <div className = "coverpage-container">
-                {
-                    props.APIData.map(function (questionData, index) {
-                        return (
-                            <Question 
-                            questionNum = {index + 1}
-                            questionText = {questionData.questionText} 
-                            answersArr = {questionData.answersArr}
-                            />
-                        )
-                    })
-                }
+            <div className = "quizpage-container">
+                <div className="questions-container">
+                    {
+                        props.APIData.map(function (questionData, index) {
+                            return (
+                                <Question 
+                                questionNum = {index + 1}
+                                questionText = {questionData.questionText} 
+                                answersArr = {questionData.answersArr}
+                                />
+                            )
+                        })
+                    }
+                    <div className = "button-container">
+                        <button className = "button-style" id = "submit-quiz">Submit Quiz</button>
+                    </div>
+                </div>
             </div>
         </div>
     )

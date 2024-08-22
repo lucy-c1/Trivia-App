@@ -81,7 +81,7 @@ label {
     background-color: #00509D;
     color: white;
     border: 0;
-    padding: 3% 10% 3% 10%;
+    padding: 0.8rem 2.5rem 0.8rem 2.5rem;
     border-radius: 15px;
 }
 
@@ -111,7 +111,7 @@ input[type = "number"] {
 .question-container {
     font-family: "karla";
     color: #00509D;
-    width: 50%;
+    width: 70%;
 }
 
 .question-container h2 {
@@ -146,21 +146,51 @@ input[type = "number"] {
 }
 
 .selected {
-    border-color: white !important;
+    border: none;
     background-color: #DEEBF8;
 }
 
 .correct {
-    border-color: white !important;
+    border: none;
     background-color: #94D7A2;
 }
 
 .wrong {
-    border-color: white !important;
+    border: none;
     background-color: #F7D9DB;
 }
 
 hr {
     color: #DEEBF8;
     margin-bottom: 2.5rem !important;
+}
+
+/* Style Quiz page */
+.quizpage-container {
+    font-family: "karla";
+    background-color: white;
+    width: 90%;
+    height: 80%;
+    color: #00509D;
+    border-radius: 10px;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    padding-left: 10rem;
+}
+
+.questions-container {
+    overflow-y: auto;
+}
+
+#submit-quiz {
+    padding: 0.8rem 2.5rem 0.8rem 2.5rem !important;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

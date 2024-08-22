@@ -89,7 +89,70 @@ function App() {
           mode: "default"
         }
       ]
-    }
+    },
+    {
+      questionText: "What is the hottest planet in our solar system?", 
+      answersArr: [
+          {
+            answerText: "Mercury",
+            mode: "default"
+          },
+          {
+            answerText: "Venus",
+            mode: "default"
+          },
+          {
+            answerText: "Mars",
+            mode: "selected"
+          },
+          {
+            answerText: "Saturn",
+            mode: "default"
+          }
+        ]
+      },
+      {
+        questionText: "What is the hottest planet in our solar system?", 
+        answersArr: [
+            {
+              answerText: "Mercury",
+              mode: "default"
+            },
+            {
+              answerText: "Venus",
+              mode: "default"
+            },
+            {
+              answerText: "Mars",
+              mode: "selected"
+            },
+            {
+              answerText: "Saturn",
+              mode: "default"
+            }
+          ]
+        },
+        {
+          questionText: "What is the hottest planet in our solar system?", 
+          answersArr: [
+              {
+                answerText: "Mercury",
+                mode: "default"
+              },
+              {
+                answerText: "Venus",
+                mode: "default"
+              },
+              {
+                answerText: "Mars",
+                mode: "selected"
+              },
+              {
+                answerText: "Saturn",
+                mode: "default"
+              }
+            ]
+          }
     ];
 
   return (
@@ -105,6 +168,7 @@ function App() {
       answersArr = {answersArr}
       /> */}
       <QuizPage APIData = {APIData} />
+      {/* <CoverPage /> */}
     </div>
   )
 }
