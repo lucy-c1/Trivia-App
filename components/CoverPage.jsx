@@ -32,7 +32,7 @@ export default function CoverPage(props) {
                     <div className="form-group" id = "group1">
                         <label htmlFor="form-select" className = "h3-style">Choose a category:</label>
                         <select onChange = {props.handleInput} className ="form-control form-control-style" id = "form-select" name = "category">
-                            <option value="Any category">Any category</option>
+                            <option value="Any">Any category</option>
                             {
                                 categories.map(function (category, index) {
                                     return (

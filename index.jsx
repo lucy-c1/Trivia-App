@@ -5,163 +5,14 @@ import Question from "./components/Question"
 import QuizPage from './components/QuizPage';
 
 function App() {
-  const questionNum = 1;
-  const questionText = "How would one say goodbye in Spanish?";
-  const answersArr = [
-    {
-      answerText: "Adios",
-      mode: "default"
-    },
-    {
-      answerText: "Hola",
-      mode: "selected"
-    },
-    {
-      answerText: "Au Revoir",
-      mode: "correct"
-    },
-    {
-      answerText: "Salir",
-      mode: "wrong"
-    }
-  ];
-
-  const APIData = [
-    {
-    questionText: "How would one say goodbye in Spanish?", 
-    answersArr: [
-        {
-          answerText: "Adios",
-          mode: "default"
-        },
-        {
-          answerText: "Hola",
-          mode: "default"
-        },
-        {
-          answerText: "Au Revoir",
-          mode: "correct"
-        },
-        {
-          answerText: "Salir",
-          mode: "wrong"
-        }
-      ]
-    },
-    {
-    questionText: "How many hearts does an octopus have?", 
-    answersArr: [
-        {
-          answerText: "One",
-          mode: "default"
-        },
-        {
-          answerText: "Two",
-          mode: "default"
-        },
-        {
-          answerText: "Three",
-          mode: "selected"
-        },
-        {
-          answerText: "Four",
-          mode: "default"
-        }
-      ]
-    },
-    {
-    questionText: "What is the hottest planet in our solar system?", 
-    answersArr: [
-        {
-          answerText: "Mercury",
-          mode: "default"
-        },
-        {
-          answerText: "Venus",
-          mode: "default"
-        },
-        {
-          answerText: "Mars",
-          mode: "selected"
-        },
-        {
-          answerText: "Saturn",
-          mode: "default"
-        }
-      ]
-    },
-    {
-      questionText: "What is the hottest planet in our solar system?", 
-      answersArr: [
-          {
-            answerText: "Mercury",
-            mode: "default"
-          },
-          {
-            answerText: "Venus",
-            mode: "default"
-          },
-          {
-            answerText: "Mars",
-            mode: "selected"
-          },
-          {
-            answerText: "Saturn",
-            mode: "default"
-          }
-        ]
-      },
-      {
-        questionText: "What is the hottest planet in our solar system?", 
-        answersArr: [
-            {
-              answerText: "Mercury",
-              mode: "default"
-            },
-            {
-              answerText: "Venus",
-              mode: "default"
-            },
-            {
-              answerText: "Mars",
-              mode: "selected"
-            },
-            {
-              answerText: "Saturn",
-              mode: "default"
-            }
-          ]
-        },
-        {
-          questionText: "What is the hottest planet in our solar system?", 
-          answersArr: [
-              {
-                answerText: "Mercury",
-                mode: "default"
-              },
-              {
-                answerText: "Venus",
-                mode: "default"
-              },
-              {
-                answerText: "Mars",
-                mode: "selected"
-              },
-              {
-                answerText: "Saturn",
-                mode: "default"
-              }
-            ]
-          }
-    ];
-
+  // represents the configurations the user provided
   const [formData, setFormData] = React.useState({
-    category: "Any category",
+    category: "Any",
     numQuestions: 5
   });
 
   function handleInput(event) {
-    console.log(formData);
+    // console.log(formData);
     setFormData(function (prevFormData) {
       return {
         ...prevFormData,
@@ -170,23 +21,81 @@ function App() {
     });
   }
 
-  function startQuizFunc() {
+  /* represents all the data from the API, not formatted */
+  const [allAPIData, setAllAPIData] = React.useState("empty");
 
+  /* Generate the API link */
+  function getAPILink(categoryId, numQuestion) {
+    if (categoryId === "Any") {
+      return "https://opentdb.com/api.php?amount=5&type=multiple"
+    } else {
+      return `https://opentdb.com/api.php?amount=${numQuestion}&category=${categoryId}&type=multiple`
+    }
   }
+
+  const [isRunAPI, setIsRunAPI] = React.useState(false); 
+
+  React.useEffect(function() {
+    if (isRunAPI) { // do not run when the page first loads
+      fetch(getAPILink(formData.category, formData.numQuestions))
+        .then(res => res.json())
+        .then(function (data) {
+          console.log(data.results);
+          setAllAPIData(data.results)
+        })
+    }
+  }, [isRunAPI])
+
+/*
+API result of an element in array:
+category: "Entertainment: Television"
+correct_answer: "Green"
+difficulty: "easy"
+incorrect_answers: ['Blue', 'Red', 'Purple']
+question: "In the Star Trek universe, what color is Vulcan blood?"
+type: "multiple"
+*/
+  function startQuizFunc(event) {
+    event.preventDefault();
+    /* Trigger API Call */
+    setIsRunAPI(true);
+  }
+
+  /* represents the formatted question-answers data retreived from the API along with other information
+  */
+  const [allData, setAllData] = React.useState([]);
+
+  React.useEffect(function() {
+    /* Format the allAPIData into the format we want */
+    if (allAPIData !== "empty") { // do not run when the page first loads
+      const formattedData = allAPIData.map(function (data) {
+        const correctAnswerIndex = Math.floor(Math.random() * 4);
+        // insert correct answer in random spot in array
+        const oldArr = data.incorrect_answers;
+        const answersArr = oldArr.slice(0, correctAnswerIndex).concat(data.correct_answer, oldArr.slice(correctAnswerIndex));
+        return {
+          "category": data.category,
+          "questionText": data.question,
+          "answerIndex": correctAnswerIndex,
+          "answersArr": answersArr.map( // turn each element from String to object and add the property of mode
+            function (answerStr) {
+              return {
+                answerText: answerStr,
+                mode: "default"
+              }
+            }
+          )
+        }
+      })
+      console.log(formattedData)
+  
+      setAllData(formattedData)
+    }
+  }, [allAPIData])
 
   return (
     <div>
-      {/* <Question 
-      questionNum = {questionNum}
-      questionText = {questionText}
-      answersArr = {answersArr}
-      />
-      <Question 
-      questionNum = {questionNum}
-      questionText = {questionText}
-      answersArr = {answersArr}
-      /> */}
-      {/* <QuizPage APIData = {APIData} /> */}
+      {/* <QuizPage allData = {allData} /> */}
       <CoverPage 
       handleInput = {handleInput}
       startQuizFunc = {startQuizFunc}
