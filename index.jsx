@@ -32,6 +32,11 @@ function App() {
       questionText = {questionText}
       answersArr = {answersArr}
       />
+      <Question 
+      questionNum = {questionNum}
+      questionText = {questionText}
+      answersArr = {answersArr}
+      />
     </div>
   )
 }

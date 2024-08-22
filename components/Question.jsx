@@ -10,17 +10,19 @@ Props:
 */
 export default function Question(props) {
     return (
-        <div>
-            <h2 class = "h2-style">Question {props.questionNum}</h2>
+        <div className = "question-container">
+            <h2 className = "h2-style">Question {props.questionNum}</h2>
             <h3 className="h3-style">{props.questionText}</h3>
-            {props.answersArr.map(function (answerData) {
-                return (
-                    <Answer 
-                    answerText = {answerData.answerText}
-                    mode = {answerData.mode}
-                    />
-                )
-            })}
+            <div className = "answer-container">
+                {props.answersArr.map(function (answerData) {
+                    return (
+                        <Answer 
+                        answerText = {answerData.answerText}
+                        mode = {answerData.mode}
+                        />
+                    )
+                })}
+            </div>
             <hr />
         </div>
     )
