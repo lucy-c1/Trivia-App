@@ -3,7 +3,7 @@ import Question from "./Question"
 
 /*
 Props:
-- APIData: data from the form. Array of objects in the format of:
+- allData: data from the form. Array of objects in the format of:
 [
 {
 questionText: "How would one say goodbye in Spanish?", 
@@ -76,7 +76,7 @@ export default function QuizPage(props) {
             <div className = "quizpage-container">
                 <div className="questions-container">
                     {
-                        props.APIData.map(function (questionData, index) {
+                        props.allData.map(function (questionData, index) {
                             return (
                                 <Question 
                                 questionNum = {index + 1}

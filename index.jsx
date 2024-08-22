@@ -46,15 +46,6 @@ function App() {
     }
   }, [isRunAPI])
 
-/*
-API result of an element in array:
-category: "Entertainment: Television"
-correct_answer: "Green"
-difficulty: "easy"
-incorrect_answers: ['Blue', 'Red', 'Purple']
-question: "In the Star Trek universe, what color is Vulcan blood?"
-type: "multiple"
-*/
   function startQuizFunc(event) {
     event.preventDefault();
     /* Trigger API Call */
@@ -65,6 +56,15 @@ type: "multiple"
   */
   const [allData, setAllData] = React.useState([]);
 
+  /*
+  API result of an element in array:
+  category: "Entertainment: Television"
+  correct_answer: "Green"
+  difficulty: "easy"
+  incorrect_answers: ['Blue', 'Red', 'Purple']
+  question: "In the Star Trek universe, what color is Vulcan blood?"
+  type: "multiple"
+  */
   React.useEffect(function() {
     /* Format the allAPIData into the format we want */
     if (allAPIData !== "empty") { // do not run when the page first loads
@@ -91,15 +91,18 @@ type: "multiple"
   
       setAllData(formattedData)
     }
-  }, [allAPIData])
+  }, [allAPIData]) // technically I can format it in the first UseEffect function, but I feel like the code is getting long...
 
   return (
     <div>
-      {/* <QuizPage allData = {allData} /> */}
+      {!isRunAPI ? 
       <CoverPage 
       handleInput = {handleInput}
       startQuizFunc = {startQuizFunc}
-      />
+      /> : 
+      <QuizPage allData = {allData} />
+      }
+
     </div>
   )
 }
