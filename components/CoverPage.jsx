@@ -1,6 +1,19 @@
 import React from "react"
 
-export default function CoverPage() {
+/*
+Props
+- handleCategoryInput:
+    - onChange event on category input
+    - setFormData
+- handleQuestionNumInput:
+    - onChange event on question num input
+    - setFormData
+- startQuizFunc
+    - onClick event on Start Quiz button
+    - change CoverPage to QuizPage
+*/
+
+export default function CoverPage(props) {
     return (
         <div className = "page-container">
             <div className = "coverpage-container">

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import CoverPage from "./components/CoverPage"
 import Question from "./components/Question"
+import QuizPage from './components/QuizPage';
 
 function App() {
   const questionNum = 1;
@@ -25,9 +26,75 @@ function App() {
     }
   ];
 
+  const APIData = [
+    {
+    questionText: "How would one say goodbye in Spanish?", 
+    answersArr: [
+        {
+          answerText: "Adios",
+          mode: "default"
+        },
+        {
+          answerText: "Hola",
+          mode: "default"
+        },
+        {
+          answerText: "Au Revoir",
+          mode: "correct"
+        },
+        {
+          answerText: "Salir",
+          mode: "wrong"
+        }
+      ]
+    },
+    {
+    questionText: "How many hearts does an octopus have?", 
+    answersArr: [
+        {
+          answerText: "One",
+          mode: "default"
+        },
+        {
+          answerText: "Two",
+          mode: "default"
+        },
+        {
+          answerText: "Three",
+          mode: "selected"
+        },
+        {
+          answerText: "Four",
+          mode: "default"
+        }
+      ]
+    },
+    {
+    questionText: "What is the hottest planet in our solar system?", 
+    answersArr: [
+        {
+          answerText: "Mercury",
+          mode: "default"
+        },
+        {
+          answerText: "Venus",
+          mode: "default"
+        },
+        {
+          answerText: "Mars",
+          mode: "selected"
+        },
+        {
+          answerText: "Saturn",
+          mode: "default"
+        }
+      ]
+    }
+    ];
+
   return (
     <div>
-      <Question 
+      {/* <Question 
       questionNum = {questionNum}
       questionText = {questionText}
       answersArr = {answersArr}
@@ -36,7 +103,8 @@ function App() {
       questionNum = {questionNum}
       questionText = {questionText}
       answersArr = {answersArr}
-      />
+      /> */}
+      <QuizPage APIData = {APIData} />
     </div>
   )
 }
