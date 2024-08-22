@@ -155,6 +155,25 @@ function App() {
           }
     ];
 
+  const [formData, setFormData] = React.useState({
+    category: "Any category",
+    numQuestions: 5
+  });
+
+  function handleInput(event) {
+    console.log(formData);
+    setFormData(function (prevFormData) {
+      return {
+        ...prevFormData,
+        [event.target.name]: event.target.value
+      }
+    });
+  }
+
+  function startQuizFunc() {
+
+  }
+
   return (
     <div>
       {/* <Question 
@@ -167,8 +186,11 @@ function App() {
       questionText = {questionText}
       answersArr = {answersArr}
       /> */}
-      <QuizPage APIData = {APIData} />
-      {/* <CoverPage /> */}
+      {/* <QuizPage APIData = {APIData} /> */}
+      <CoverPage 
+      handleInput = {handleInput}
+      startQuizFunc = {startQuizFunc}
+      />
     </div>
   )
 }
