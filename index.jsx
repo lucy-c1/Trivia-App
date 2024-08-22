@@ -1,11 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CoverPage from "./CoverPage"
+import CoverPage from "./components/CoverPage"
+import Question from "./components/Question"
 
 function App() {
+  const questionNum = 1;
+  const questionText = "How would one say goodbye in Spanish?";
+  const answersArr = [
+    {
+      answerText: "Adios",
+      mode: "default"
+    },
+    {
+      answerText: "Hola",
+      mode: "selected"
+    },
+    {
+      answerText: "Au Revoir",
+      mode: "correct"
+    },
+    {
+      answerText: "Salir",
+      mode: "wrong"
+    }
+  ];
+
   return (
     <div>
-      <CoverPage />
+      <Question 
+      questionNum = {questionNum}
+      questionText = {questionText}
+      answersArr = {answersArr}
+      />
     </div>
   )
 }
