@@ -173,12 +173,18 @@ hr {
     height: 80%;
     color: #00509D;
     border-radius: 10px;
-    padding-top: 5rem;
+    padding-top: 4rem;
     padding-bottom: 5rem;
 
     display: flex;
     flex-direction: column;
     padding-left: 10rem;
+}
+
+.quizinfo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .questions-container {

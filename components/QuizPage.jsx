@@ -72,6 +72,11 @@ answersArr: [
 */
 export default function QuizPage(props) {
     const [numCorrectAnswers, setNumCorrectAnswers] = React.useState(-1);
+    const categories = ["Books", "Film", "Music", "Musicals and theatres", "Television", "Video games",
+      "board games", "Science and nature", "Computers", "Mathematics", "Mythology", "Sports", "Geography",
+      "History", "Politics", "Art", "Celebrities", "Animals", "Vehicles", "Comics", "Gadgets", "Anime",
+      "Cartoon and animation"
+  ];
 
     function checkQuizAnswers() {
         setNumCorrectAnswers(0);
@@ -103,6 +108,9 @@ export default function QuizPage(props) {
     return (
         <div className = "page-container">
             <div className = "quizpage-container">
+              <div className="quizinfo-container">
+                <h2 className = "h2-style">Question Category: {props.formData.category === "Any" ? "Any" : categories[props.formData.category - 10]}</h2>
+              </div>
                 <div className="questions-container">
                     {
                         props.allData.map(function (questionData, index) {

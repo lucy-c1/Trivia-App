@@ -200,6 +200,7 @@ function App() {
       changeModeFunct = {changeModeFunct}
       changeUserAnswerIndex = {changeUserAnswerIndex}
       startOver = {startOver}
+      formData = {formData}
       />
       }
 
