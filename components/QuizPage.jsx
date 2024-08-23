@@ -116,6 +116,7 @@ export default function QuizPage(props) {
                         props.allData.map(function (questionData, index) {
                             return (
                                 <Question 
+                                key = {index}
                                 questionNum = {index + 1}
                                 questionText = {questionData.questionText} 
                                 answersArr = {questionData.answersArr}

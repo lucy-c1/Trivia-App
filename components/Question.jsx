@@ -30,6 +30,7 @@ export default function Question(props) {
                 {props.answersArr.map(function (answerData, index) {
                     return (
                         <Answer 
+                        key = {answerData.answerText}
                         answerText = {answerData.answerText}
                         mode = {answerData.mode}
                         answerIndex = {index}

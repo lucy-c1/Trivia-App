@@ -37,7 +37,7 @@ export default function CoverPage(props) {
                             {
                                 categories.map(function (category, index) {
                                     return (
-                                        <option value = {index + 10}>{category}</option> // plus 10 because API starts num 10
+                                        <option value = {index + 10} key = {category}>{category}</option> // plus 10 because API starts num 10
                                     )
                                 })
                             }
