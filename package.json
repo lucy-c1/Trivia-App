@@ -1,7 +1,10 @@
 {
   "name": "Scrim-s00fsopfdn",
   "description": "https://v2.scrimba.com/s00fsopfdn",
+  "homepage": "https://lucy-c1.github.io/Trivia-App",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
