@@ -3,9 +3,12 @@ import Question from "./Question"
 
 /*
 Props:
+- changeModeFunct
+- changeUserAnswerIndex
+- startOver
+- formData
 - allData: data from the form. Array of objects in the format of:
-[
-{
+[{
 questionText: "How would one say goodbye in Spanish?", 
 answersArr: [
     {
@@ -25,54 +28,11 @@ answersArr: [
       mode: "wrong"
     }
   ]
-},
-{
-questionText: "How many hearts does an octopus have?", 
-answersArr: [
-    {
-      answerText: "One",
-      mode: "default"
-    },
-    {
-      answerText: "Two",
-      mode: "default"
-    },
-    {
-      answerText: "Three",
-      mode: "selected"
-    },
-    {
-      answerText: "Four",
-      mode: "default"
-    }
-  ]
-},
-{
-questionText: "What is the hottest planet in our solar system?", 
-answersArr: [
-    {
-      answerText: "Mercury",
-      mode: "default"
-    },
-    {
-      answerText: "Venus",
-      mode: "default"
-    },
-    {
-      answerText: "Mars",
-      mode: "selected"
-    },
-    {
-      answerText: "Saturn",
-      mode: "default"
-    }
-  ]
-}
-]
+}]
 */
 export default function QuizPage(props) {
     const [numCorrectAnswers, setNumCorrectAnswers] = React.useState(-1);
-    const categories = ["Books", "Film", "Music", "Musicals and theatres", "Television", "Video games",
+    const categories = ["General Knowledge", "Books", "Film", "Music", "Musicals and theatres", "Television", "Video games",
       "board games", "Science and nature", "Computers", "Mathematics", "Mythology", "Sports", "Geography",
       "History", "Politics", "Art", "Celebrities", "Animals", "Vehicles", "Comics", "Gadgets", "Anime",
       "Cartoon and animation"
@@ -109,7 +69,7 @@ export default function QuizPage(props) {
         <div className = "page-container">
             <div className = "quizpage-container">
               <div className="quizinfo-container">
-                <h2 className = "h2-style">Question Category: {props.formData.category === "Any" ? "Any" : categories[props.formData.category - 10]}</h2>
+                <h2 className = "h2-style">Question Category: {props.formData.category === "Any" ? "Any" : categories[props.formData.category - 9]}</h2>
               </div>
                 <div className="questions-container">
                     {

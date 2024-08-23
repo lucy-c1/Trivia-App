@@ -7,6 +7,13 @@ Props:
     - depending on the mode, style is different
 - changeModeFunct
 - questionNum
+- answerIndex: argument for changeUserAnswerIndex and changeModeFunct
+- questionNum: argument for changeUserAnswerIndex and changeModeFunct
+- changeModeFunct
+- changeUserAnswerIndex
+- checkOtherAnswers: a child cannot know of what their siblings are
+- numCorrectAnswers: used to prevent users from being able to click on an answer after quiz is submitted
+    - value of -1 means the quiz is not graded yet which means it has not been submitted yet
 */
 export default function Answer(props) {
     return (

@@ -7,6 +7,9 @@ Props:
 - questionText - question from API associated with question questionNum
 - answersArr - answer choices from API associated with question and the current mode, an array of objects
     - Ex: [{answerText: "adios", mode: "default"}, {...}, ...]
+- changeModeFunct - change mode property in answersArr array in parent state allData
+- changeUserAnswerIndex = change userAnswerIndex property in parent state allData
+- numCorrectAnswers
 */
 export default function Question(props) {
     /* checks if another answer is already selected and if it is, reset it back to default

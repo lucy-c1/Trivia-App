@@ -11,16 +11,18 @@ function App() {
     numQuestions: 5
   });
 
-  // local storage implementation, represents what is in defaultValue in CoverPage
-  // different from formData because formData is always changing with the user, this state does not
-  // this state only changes at a page load and at the end of the quiz when the startOver function is called
+  /*
+  local storage implementation, represents what is in defaultValue in CoverPage
+  different from formData because formData is always changing with the user, this state does not
+  this state only changes at a page load and at the end of the quiz when the startOver function is called
+  */
   const [defaultValues, setDefaultValues] = React.useState(JSON.parse(localStorage.getItem("formData")) || {
     category: "Any",
     numQuestions: 5
   })
 
+  /* update formData state every time the user makes changes */
   function handleInput(event) {
-    // console.log(formData);
     setFormData(function (prevFormData) {
       return {
         ...prevFormData,
@@ -31,7 +33,6 @@ function App() {
 
   /* Store formData in local storage */
   React.useEffect(function () {
-    // console.log(formData)
     localStorage.setItem("formData", JSON.stringify(formData))
   }, [formData])
 
@@ -47,6 +48,7 @@ function App() {
     }
   }
 
+  /* used to trigger API call */
   const [isRunAPI, setIsRunAPI] = React.useState(false); 
 
   React.useEffect(function() {
@@ -54,14 +56,13 @@ function App() {
       fetch(getAPILink(formData.category, formData.numQuestions))
         .then(res => res.json())
         .then(function (data) {
-          // console.log(data.results);
           setAllAPIData(data.results)
         })
     }
   }, [isRunAPI])
 
   function startQuizFunc(event) {
-    /* Trigger API Call only if user enters valid input for numQuestions */
+    /* trigger API Call only if user enters valid input for numQuestions */
     if (formData.numQuestions > 0 && formData.numQuestions <= 50) {
       event.preventDefault();
       setIsRunAPI(true);
@@ -70,29 +71,16 @@ function App() {
     }
   }
 
-  /* represents the formatted question-answers data retreived from the API along with other information
-  */
+  /* represents the formatted question-answers data retreived from the API along with other information */
   const [allData, setAllData] = React.useState([]);
 
-  // React.useEffect(function () {
-  //   console.log(allData);
-  //   console.log("Hello????????")
-  // }, [allData])
-
-  /* Changes property userAnswerIndex in allData. Used by child component to change state in parent component
-  Takes in 2 parameters: questionIndex and newUserAnswerIndex
+  /*
+  Changes property userAnswerIndex in allData. Used by child component to 
+  change state in parent component
   */
   function changeUserAnswerIndex(questionIndex, newUserAnswerIndex) {
-    // console.log("Question index: " + questionIndex)
-    // console.log("New user answer index: " + newUserAnswerIndex)
     setAllData(function (prevAllData) {
       return prevAllData.map(function (data, index) {
-        // console.log(data)
-        // console.log(index)
-        // console.log(index === questionIndex ? {
-        //   ...data,
-        //   "userAnswerIndex": newUserAnswerIndex
-        // } : data)
         return index === questionIndex ? {
           ...data,
           "userAnswerIndex": newUserAnswerIndex
@@ -101,26 +89,23 @@ function App() {
     })
   }
 
-  /* Changes property answersArr[answerIndex].mode in allData. Used by child component to change state in parent component
-  Takes in 3 parameters: questionIndex, answerIndex, and newMode
+  /* 
+  Changes property answersArr[answerIndex].mode in allData. Used by child 
+  component to change state in parent component
+  changeUserAnswerIndex and changeModeFunct are two separate functions because later, 
+  changeModeFunct is used to set answers to correct/wrong after the user submits quiz
   */
   function changeModeFunct(questionIndex, answerIndex, newMode) {
-    // console.log("Question index: " + questionIndex);
-    // console.log("Answer index: " + answerIndex);
-    // console.log("new mode: " + newMode);
-
     setAllData(function (prevAllData) {
-      return prevAllData.map(function (data, i) { // go through each question-answer element in array
+      return prevAllData.map(function (data, i) { // go through each question-answer element in allData
         if (i === questionIndex) {
-          const newAnswersArr = data.answersArr.map(function (answer, index) { // go through each answer in answersArr
+          const newAnswersArr = data.answersArr.map(function (answer, index) { // go through each answer in answersArr for that question-answer element
             return index === answerIndex ? {
               ...answer,
               mode: newMode
             } : answer
           })
           
-          // console.log(newAnswersArr)
-
           return {
             ...data,
             answersArr: newAnswersArr
@@ -132,13 +117,14 @@ function App() {
     });
   }
 
+  /* the data from the API call are HTML entities, have to decode before showing to user */
   function decodeHTMLEntities(text) {
     const textArea = document.createElement('textarea');
     textArea.innerHTML = text;
     return textArea.value;
   }
   /*
-  API result of an element in array:
+  Example API result of an element in array:
   category: "Entertainment: Television"
   correct_answer: "Green"
   difficulty: "easy"
@@ -146,13 +132,14 @@ function App() {
   question: "In the Star Trek universe, what color is Vulcan blood?"
   type: "multiple"
   */
+  /* convert the data retrieved from API into desired format */
   React.useEffect(function() {
-    /* Format the allAPIData into the format we want */
     if (allAPIData !== "empty") { // do not run when the page first loads
       const formattedData = allAPIData.map(function (data) {
         const correctAnswerIndex = Math.floor(Math.random() * 4);
         // insert correct answer in random spot in array
         const oldArr = data.incorrect_answers;
+        // using slice and concat because they return a new array unlike splice which modifies original
         const answersArr = oldArr.slice(0, correctAnswerIndex).concat(data.correct_answer, oldArr.slice(correctAnswerIndex));
         return {
           "category": data.category,
@@ -169,17 +156,13 @@ function App() {
           )
         }
       })
-      // console.log(formattedData)
-  
       setAllData(formattedData)
     }
-  }, [allAPIData]) // technically I can format it in the first UseEffect function, but I feel like the code is getting long...
+  }, [allAPIData]) // technically can format everything in the first UseEffect function, but code would be too long
 
+  /* called after the user clicks submit quiz button */
   function startOver() {
-    // setFormData({
-    //   category: "Any",
-    //   numQuestions: 5
-    // })
+    /* retrive the user's previous quiz configurations */
     setFormData(JSON.parse(localStorage.getItem("formData")))
     setDefaultValues(JSON.parse(localStorage.getItem("formData")))
     setAllAPIData("empty");
@@ -214,7 +197,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 API keys:
 Any category: https://opentdb.com/api.php?amount=5&type=multiple
 Science and nature: https://opentdb.com/api.php?amount=5&category=17&type=multiple
-General knowledge: https://opentdb.com/api.php?amount=5&category=9&type=multiple
+
+General knowledge: 9
 Books: category 10
 Film: category 11
 Music: 12
@@ -222,6 +206,7 @@ Musicals and theatres: 13
 Television: 14
 Video games: 15
 Board games: 16
+Science and nature: 17
 Computers: 18
 Mathematics: 19
 Mythology: 20
@@ -237,7 +222,4 @@ Comics: 29
 Gadgets: 30
 Anime: 31
 Cartoon and animation: 32
-You can also get the category name from the API result itself
-
-Allows users to choose num questions (min 5) and the category (or any category)
 */
