@@ -1,19 +1,16 @@
-# Getting Started
-Install the dependencies and run the project
+# General description
+Quizz is a trivia quiz website that creates quiz questions based on user-selected settings. The questions are sourced from the [Open Trivia Database API](https://opentdb.com/api_config.php). The website is built with React and Bootstrap, and it saves previous quiz configurations using local storage.
+
+# Running the project
+1. Website is available in the following link: add link
+2. Install the dependencies and run the project
 ```
 npm install
 npm start
 ```
 
-Head over to https://vitejs.dev/ to learn more about configuring vite
-## About Scrimba
-
-At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
-If we succeed with this, it will give anyone who wants to become a software developer a realistic shot at succeeding, regardless of where they live and the size of their wallets 🎉
-The Frontend Developer Career Path aims to teach you everything you need to become a Junior Developer, or you could take a deep-dive with one of our advanced courses 🚀
-
-- [Our courses](https://scrimba.com/allcourses)
-- [The Frontend Career Path](https://scrimba.com/learn/frontend)
-- [Become a Scrimba Pro member](https://scrimba.com/pricing)
-
-Happy Coding!
+# Project workflow
+- Created initial project design using Figma. [Figma design here](https://www.figma.com/design/exdvvRFGgPJd8VBOQ4EuXA/Quizz?node-id=0-1&m=dev&t=74tJrKyYoS2V38Rt-1)
+- Planned the main components of the project using github issues 
+- Drew a [State tree]() to plan the interactions between the parent and child components.
+- Added responsiveness to the website using media queries.
