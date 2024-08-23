@@ -71,6 +71,40 @@ answersArr: [
 ]
 */
 export default function QuizPage(props) {
+    const [numCorrectAnswers, setNumCorrectAnswers] = React.useState(-1);
+
+    function checkQuizAnswers() {
+        setNumCorrectAnswers(0);
+
+        for (let i = 0; i < props.allData.length; i++) {
+            const questionData = props.allData[i];
+            if (questionData.userAnswerIndex === questionData.answerIndex) {
+                setNumCorrectAnswers(function (prevNumCorrect) {
+                    return prevNumCorrect + 1;
+                });
+                props.changeModeFunct(i, questionData.answerIndex, "correct")
+            } else {
+                props.changeModeFunct(i, questionData.answerIndex, "correct")
+                props.changeModeFunct(i, questionData.userAnswerIndex, "wrong")
+            }
+        }
+    }
+
+    function parseResult(numCorrect) {
+        const totalQuestions = props.allData.length;
+        const percent = Math.round(Number.parseFloat(numCorrect) / totalQuestions * 100);
+        return `Your score is: ${numCorrect}/${totalQuestions} (${percent}%)`;
+    }
+
+    React.useEffect(function () {
+        console.log(parseResult(numCorrectAnswers));
+
+    }, [numCorrectAnswers]);
+
+    function startOver() {
+        
+    }
+
     return (
         <div className = "page-container">
             <div className = "quizpage-container">
@@ -88,9 +122,27 @@ export default function QuizPage(props) {
                             )
                         })
                     }
+                    {numCorrectAnswers === -1 ? 
+                    <h3></h3> : 
+                    <div className="result-container">
+                        <h3 className = "h3-style">
+                            {parseResult(numCorrectAnswers)}
+                        </h3>
+                    </div>}
+                    {numCorrectAnswers === -1 ? 
                     <div className = "button-container">
-                        <button className = "button-style" id = "submit-quiz">Submit Quiz</button>
+                        <button onClick = {function () {
+                            return checkQuizAnswers();
+                        }} 
+                        className = "button-style" id = "submit-quiz">Submit Quiz</button>
+                    </div> : 
+                    <div className = "button-container">
+                        <button onClick = {function () {
+                            return startOver();
+                        }} 
+                        className = "button-style" id = "submit-quiz">Play Again</button>
                     </div>
+                    }
                 </div>
             </div>
         </div>

@@ -56,10 +56,10 @@ function App() {
   */
   const [allData, setAllData] = React.useState([]);
 
-  React.useEffect(function () {
-    console.log(allData);
-    console.log("Hello????????/")
-  }, [allData])
+  // React.useEffect(function () {
+  //   console.log(allData);
+  //   console.log("Hello????????")
+  // }, [allData])
 
   /* Changes property userAnswerIndex in allData. Used by child component to change state in parent component
   Takes in 2 parameters: questionIndex and newUserAnswerIndex
@@ -87,9 +87,9 @@ function App() {
   Takes in 3 parameters: questionIndex, answerIndex, and newMode
   */
   function changeModeFunct(questionIndex, answerIndex, newMode) {
-    console.log("Question index: " + questionIndex);
-    console.log("Answer index: " + answerIndex);
-    console.log("new mode: " + newMode);
+    // console.log("Question index: " + questionIndex);
+    // console.log("Answer index: " + answerIndex);
+    // console.log("new mode: " + newMode);
 
     setAllData(function (prevAllData) {
       return prevAllData.map(function (data, i) { // go through each question-answer element in array
@@ -101,7 +101,7 @@ function App() {
             } : answer
           })
           
-          console.log(newAnswersArr)
+          // console.log(newAnswersArr)
 
           return {
             ...data,
@@ -146,7 +146,7 @@ function App() {
           )
         }
       })
-      console.log(formattedData)
+      // console.log(formattedData)
   
       setAllData(formattedData)
     }
