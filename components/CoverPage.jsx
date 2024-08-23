@@ -31,7 +31,7 @@ export default function CoverPage(props) {
                 <form className = "form-container">
                     <div className="form-group" id = "group1">
                         <label htmlFor="form-select" className = "h3-style">Choose a category:</label>
-                        <select onChange = {props.handleInput} className ="form-control form-control-style" id = "form-select" name = "category">
+                        <select onChange = {props.handleInput} className ="form-control form-control-style" id = "form-select" name = "category" defaultValue = {props.defaultValues.category}>
                             <option value="Any">Any category</option>
                             {
                                 categories.map(function (category, index) {
@@ -45,7 +45,7 @@ export default function CoverPage(props) {
 
                     <div className="form-group">
                         <label htmlFor="number-input" className = "h3-style">Number of questions:</label>
-                        <input onChange = {props.handleInput} type="number" className = "form-control form-control-style" id = "number-input" name = "numQuestions" defaultValue = "5" />
+                        <input onChange = {props.handleInput} type="number" className = "form-control form-control-style" id = "number-input" name = "numQuestions" defaultValue = {props.defaultValues.numQuestions} />
                     </div>
 
                     <button onClick = {props.startQuizFunc} type="submit" className = "button-style" id = "start-quiz-button">Start Quiz</button>

@@ -6,10 +6,18 @@ import QuizPage from './components/QuizPage';
 
 function App() {
   // represents the configurations the user provided
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState(JSON.parse(localStorage.getItem("formData")) || {
     category: "Any",
     numQuestions: 5
   });
+
+  // local storage implementation, represents what is in defaultValue in CoverPage
+  // different from formData because formData is always changing with the user, this state does not
+  // this state only changes at a page load and at the end of the quiz when the startOver function is called
+  const [defaultValues, setDefaultValues] = React.useState(JSON.parse(localStorage.getItem("formData")) || {
+    category: "Any",
+    numQuestions: 5
+  })
 
   function handleInput(event) {
     // console.log(formData);
@@ -20,6 +28,12 @@ function App() {
       }
     });
   }
+
+  /* Store formData in local storage */
+  React.useEffect(function () {
+    // console.log(formData)
+    localStorage.setItem("formData", JSON.stringify(formData))
+  }, [formData])
 
   /* represents all the data from the API, not formatted */
   const [allAPIData, setAllAPIData] = React.useState("empty");
@@ -40,7 +54,7 @@ function App() {
       fetch(getAPILink(formData.category, formData.numQuestions))
         .then(res => res.json())
         .then(function (data) {
-          console.log(data.results);
+          // console.log(data.results);
           setAllAPIData(data.results)
         })
     }
@@ -158,10 +172,12 @@ function App() {
   }, [allAPIData]) // technically I can format it in the first UseEffect function, but I feel like the code is getting long...
 
   function startOver() {
-    setFormData({
-      category: "Any",
-      numQuestions: 5
-    })
+    // setFormData({
+    //   category: "Any",
+    //   numQuestions: 5
+    // })
+    setFormData(JSON.parse(localStorage.getItem("formData")))
+    setDefaultValues(JSON.parse(localStorage.getItem("formData")))
     setAllAPIData("empty");
     setIsRunAPI(false);
     setAllData([]);
@@ -173,6 +189,7 @@ function App() {
       <CoverPage 
       handleInput = {handleInput}
       startQuizFunc = {startQuizFunc}
+      defaultValues = {defaultValues}
       /> : 
       <QuizPage 
       allData = {allData} 

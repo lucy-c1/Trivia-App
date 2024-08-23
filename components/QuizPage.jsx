@@ -97,7 +97,7 @@ export default function QuizPage(props) {
     }
 
     React.useEffect(function () {
-        console.log(parseResult(numCorrectAnswers));
+        // console.log(parseResult(numCorrectAnswers));
     }, [numCorrectAnswers]);
 
     return (
