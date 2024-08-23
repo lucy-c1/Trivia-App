@@ -61,9 +61,13 @@ function App() {
   }, [isRunAPI])
 
   function startQuizFunc(event) {
-    event.preventDefault();
-    /* Trigger API Call */
-    setIsRunAPI(true);
+    /* Trigger API Call only if user enters valid input for numQuestions */
+    if (formData.numQuestions > 0 && formData.numQuestions <= 50) {
+      event.preventDefault();
+      setIsRunAPI(true);
+    } else {
+      console.log("number of questions must be between 1 and 50 inclusive")
+    }
   }
 
   /* represents the formatted question-answers data retreived from the API along with other information
