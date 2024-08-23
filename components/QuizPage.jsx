@@ -82,6 +82,8 @@ export default function QuizPage(props) {
                                 questionNum = {index + 1}
                                 questionText = {questionData.questionText} 
                                 answersArr = {questionData.answersArr}
+                                changeModeFunct = {props.changeModeFunct}
+                                changeUserAnswerIndex = {props.changeUserAnswerIndex}
                                 />
                             )
                         })

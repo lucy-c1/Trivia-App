@@ -56,6 +56,64 @@ function App() {
   */
   const [allData, setAllData] = React.useState([]);
 
+  React.useEffect(function () {
+    console.log(allData);
+    console.log("Hello????????/")
+  }, [allData])
+
+  /* Changes property userAnswerIndex in allData. Used by child component to change state in parent component
+  Takes in 2 parameters: questionIndex and newUserAnswerIndex
+  */
+  function changeUserAnswerIndex(questionIndex, newUserAnswerIndex) {
+    // console.log("Question index: " + questionIndex)
+    // console.log("New user answer index: " + newUserAnswerIndex)
+    setAllData(function (prevAllData) {
+      return prevAllData.map(function (data, index) {
+        // console.log(data)
+        // console.log(index)
+        // console.log(index === questionIndex ? {
+        //   ...data,
+        //   "userAnswerIndex": newUserAnswerIndex
+        // } : data)
+        return index === questionIndex ? {
+          ...data,
+          "userAnswerIndex": newUserAnswerIndex
+        } : data
+      })
+    })
+  }
+
+  /* Changes property answersArr[answerIndex].mode in allData. Used by child component to change state in parent component
+  Takes in 3 parameters: questionIndex, answerIndex, and newMode
+  */
+  function changeModeFunct(questionIndex, answerIndex, newMode) {
+    console.log("Question index: " + questionIndex);
+    console.log("Answer index: " + answerIndex);
+    console.log("new mode: " + newMode);
+
+    setAllData(function (prevAllData) {
+      return prevAllData.map(function (data, i) { // go through each question-answer element in array
+        if (i === questionIndex) {
+          const newAnswersArr = data.answersArr.map(function (answer, index) { // go through each answer in answersArr
+            return index === answerIndex ? {
+              ...answer,
+              mode: newMode
+            } : answer
+          })
+          
+          console.log(newAnswersArr)
+
+          return {
+            ...data,
+            answersArr: newAnswersArr
+          }
+        } else {
+          return data;
+        }
+      })
+    });
+  }
+
   /*
   API result of an element in array:
   category: "Entertainment: Television"
@@ -76,6 +134,7 @@ function App() {
         return {
           "category": data.category,
           "questionText": data.question,
+          "userAnswerIndex": -1,
           "answerIndex": correctAnswerIndex,
           "answersArr": answersArr.map( // turn each element from String to object and add the property of mode
             function (answerStr) {
@@ -100,7 +159,11 @@ function App() {
       handleInput = {handleInput}
       startQuizFunc = {startQuizFunc}
       /> : 
-      <QuizPage allData = {allData} />
+      <QuizPage 
+      allData = {allData} 
+      changeModeFunct = {changeModeFunct}
+      changeUserAnswerIndex = {changeUserAnswerIndex}
+      />
       }
 
     </div>

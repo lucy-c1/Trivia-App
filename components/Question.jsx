@@ -14,11 +14,15 @@ export default function Question(props) {
             <h2 className = "h2-style">Question {props.questionNum}</h2>
             <h3 className="h3-style">{props.questionText}</h3>
             <div className = "answer-container">
-                {props.answersArr.map(function (answerData) {
+                {props.answersArr.map(function (answerData, index) {
                     return (
                         <Answer 
                         answerText = {answerData.answerText}
                         mode = {answerData.mode}
+                        answerIndex = {index}
+                        questionNum = {props.questionNum}
+                        changeModeFunct = {props.changeModeFunct}
+                        changeUserAnswerIndex = {props.changeUserAnswerIndex}
                         />
                     )
                 })}
