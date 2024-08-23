@@ -12,5 +12,5 @@ npm start
 # Project workflow
 - Created initial project design using Figma. [Figma design here](https://www.figma.com/design/exdvvRFGgPJd8VBOQ4EuXA/Quizz?node-id=0-1&m=dev&t=74tJrKyYoS2V38Rt-1)
 - Planned the main components of the project using github issues 
-- Drew a [State tree]() to plan the interactions between the parent and child components.
+- Drew a [State tree](https://github.com/user-attachments/assets/9792b2d8-eee1-46ef-bd83-5ac28e216a70) to plan the interactions between the parent and child components.
 - Added responsiveness to the website using media queries.
