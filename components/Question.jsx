@@ -37,6 +37,7 @@ export default function Question(props) {
                         changeModeFunct = {props.changeModeFunct}
                         changeUserAnswerIndex = {props.changeUserAnswerIndex}
                         checkOtherAnswers = {checkOtherAnswers}
+                        numCorrectAnswers = {props.numCorrectAnswers}
                         />
                     )
                 })}

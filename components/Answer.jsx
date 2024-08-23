@@ -12,7 +12,7 @@ export default function Answer(props) {
     return (
         <div>
             <button onClick = {function () {
-                if (props.mode === "default") {
+                if (props.mode === "default" && props.numCorrectAnswers === -1) {
                     props.checkOtherAnswers();
                     props.changeUserAnswerIndex(props.questionNum - 1, props.answerIndex)
                     return props.changeModeFunct(props.questionNum - 1, props.answerIndex, "selected")

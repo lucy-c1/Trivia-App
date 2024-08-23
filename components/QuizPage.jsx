@@ -113,6 +113,7 @@ export default function QuizPage(props) {
                                 answersArr = {questionData.answersArr}
                                 changeModeFunct = {props.changeModeFunct}
                                 changeUserAnswerIndex = {props.changeUserAnswerIndex}
+                                numCorrectAnswers = {numCorrectAnswers}
                                 />
                             )
                         })
@@ -124,7 +125,7 @@ export default function QuizPage(props) {
                             {parseResult(numCorrectAnswers)}
                         </h3>
                     </div>}
-                    {numCorrectAnswers === -1 ? 
+                    {numCorrectAnswers === -1 ? // uses numCorrectAnswers to check whether the quiz is submitted
                     <div className = "button-container">
                         <button onClick = {function () {
                             return checkQuizAnswers();
