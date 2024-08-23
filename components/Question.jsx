@@ -9,6 +9,19 @@ Props:
     - Ex: [{answerText: "adios", mode: "default"}, {...}, ...]
 */
 export default function Question(props) {
+    /* checks if another answer is already selected and if it is, reset it back to default
+    this function only runs before changing an answer from default to selected. Not the other way around
+    */
+    function checkOtherAnswers() {
+        /* anything in answersArr that is selected at this point should be reset back to default */
+        props.answersArr.map(function (answer, index) {
+            if (answer.mode === "selected") {
+                return props.changeModeFunct(props.questionNum - 1, index, "default")
+            } else {
+                return answer;
+            }
+        })
+    }
     return (
         <div className = "question-container">
             <h2 className = "h2-style">Question {props.questionNum}</h2>
@@ -23,6 +36,7 @@ export default function Question(props) {
                         questionNum = {props.questionNum}
                         changeModeFunct = {props.changeModeFunct}
                         changeUserAnswerIndex = {props.changeUserAnswerIndex}
+                        checkOtherAnswers = {checkOtherAnswers}
                         />
                     )
                 })}
