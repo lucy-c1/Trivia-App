@@ -114,6 +114,11 @@ function App() {
     });
   }
 
+  function decodeHTMLEntities(text) {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+  }
   /*
   API result of an element in array:
   category: "Entertainment: Television"
@@ -133,13 +138,13 @@ function App() {
         const answersArr = oldArr.slice(0, correctAnswerIndex).concat(data.correct_answer, oldArr.slice(correctAnswerIndex));
         return {
           "category": data.category,
-          "questionText": data.question,
+          "questionText": decodeHTMLEntities(data.question),
           "userAnswerIndex": -1,
           "answerIndex": correctAnswerIndex,
           "answersArr": answersArr.map( // turn each element from String to object and add the property of mode
             function (answerStr) {
               return {
-                answerText: answerStr,
+                answerText: decodeHTMLEntities(answerStr),
                 mode: "default"
               }
             }
