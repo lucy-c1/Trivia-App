@@ -185,9 +185,11 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-right: 10rem;
 }
 
 .questions-container {
+    margin-top: 1rem;
     overflow-y: auto;
 }
 
@@ -199,6 +201,7 @@ hr {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-right: 10rem;
 }
 
 .result-container {
@@ -247,5 +250,55 @@ hr {
 @media (max-height: 600px) {
     .title-container {
         height: 10rem;
+    }
+}
+
+/* Add responsiveness to QuizPage */
+@media (max-width: 1199.98px) {
+    .quizpage-container {
+        padding-left: 6rem;
+    }
+    .quizinfo-container {
+        padding-right: 6rem;
+    }
+    .button-container {
+        padding-right: 6rem;
+    }
+    .questions-container {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .quizpage-container {
+        padding-left: 4rem;
+    }
+    .questions-container {
+        margin-top: 1rem;
+    }
+    .question-container {
+        width: 90%;
+    }
+    .answer-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .answer-container div {
+        margin-bottom: 1rem;
+    }
+    .quizinfo-container {
+        padding-right: 4rem;
+    }
+    .button-container {
+        padding-right: 4rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .quizinfo-container {
+        padding-right: 4rem;
+    }
+    .button-container {
+        padding-right: 4rem;
     }
 }
