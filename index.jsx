@@ -152,6 +152,16 @@ function App() {
     }
   }, [allAPIData]) // technically I can format it in the first UseEffect function, but I feel like the code is getting long...
 
+  function startOver() {
+    setFormData({
+      category: "Any",
+      numQuestions: 5
+    })
+    setAllAPIData("empty");
+    setIsRunAPI(false);
+    setAllData([]);
+  }
+
   return (
     <div>
       {!isRunAPI ? 
@@ -163,6 +173,7 @@ function App() {
       allData = {allData} 
       changeModeFunct = {changeModeFunct}
       changeUserAnswerIndex = {changeUserAnswerIndex}
+      startOver = {startOver}
       />
       }
 

@@ -98,12 +98,7 @@ export default function QuizPage(props) {
 
     React.useEffect(function () {
         console.log(parseResult(numCorrectAnswers));
-
     }, [numCorrectAnswers]);
-
-    function startOver() {
-        
-    }
 
     return (
         <div className = "page-container">
@@ -138,7 +133,8 @@ export default function QuizPage(props) {
                     </div> : 
                     <div className = "button-container">
                         <button onClick = {function () {
-                            return startOver();
+                            setNumCorrectAnswers(-1);
+                            return props.startOver();
                         }} 
                         className = "button-style" id = "submit-quiz">Play Again</button>
                     </div>
