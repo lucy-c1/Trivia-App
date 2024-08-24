@@ -1,5 +1,6 @@
 import React from "react"
 import Answer from "./Answer"
+import ExplainButton from "./ExplainButton"
 
 /*
 Props:
@@ -46,6 +47,8 @@ export default function Question(props) {
                     )
                 })}
             </div>
+            {/* only show when quiz submits */}
+            {props.numCorrectAnswers !== -1 && <ExplainButton />}
             <hr />
         </div>
     )

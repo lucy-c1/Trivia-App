@@ -302,3 +302,12 @@ hr {
         padding-right: 4rem;
     }
 }
+
+/* Explain Button style */
+#aiButton {
+    background-color: light;
+    font-family: "karla";
+    border: none;
+    padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+    margin-bottom: 1rem;
+}
