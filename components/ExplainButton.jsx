@@ -12,26 +12,24 @@ props:
 */
 export default function ExplainButton(props) {
     const [isClicked, setIsClick] = React.useState(false);
-    /* array of objects that stores aiResponses, has properties 
-    questionNum: acts as id
-    aiResponse: "String that represents the response from AI"
-    */
-    const [aiResponses, setAIResponses] = React.useState([]);
+    /* String that represents the response from AI */
+    const [aiResponse, setAIResponse] = React.useState("");
+
+    function parseInput() {
+        return `Question: ${props.questionText} Answer: ${props.answerText}`
+    }
 
     /* Will need 2 pieces of info: the question and the answer to the question */
     function fetchAIResponse() {
-        console.log("Attempting to fetch AI response");
+        const input = parseInput();
+        console.log(input);
     }
 
     /* will fetchAIResponse when isClicked is true */
     React.useEffect(() => {
-        if (isClicked) {
-            console.log("isClicked is true");
-            /* TO DO: add code to determine if a response from AI was
-            already generated before in aiResponses before running 
-            fetchAIResponse */
+        if (isClicked && aiResponse === "") { // only fetch response if explain button is clicked and aiResponse is empty meaning there has not been a response generated before
             fetchAIResponse();
-        }
+        } // else there's already a response for this question, so no need to do anything. Previously generated response will load
     }, [isClicked])
 
     function changeIsClicked() {
@@ -46,6 +44,7 @@ export default function ExplainButton(props) {
             
             {isClicked && 
             <p id = "aiResponseText">
+                {aiResponse}
                 This will eventually be AI generated response~ This will eventually be AI generated response~ This will eventually be AI generated response~
             </p>
             }

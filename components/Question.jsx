@@ -48,7 +48,11 @@ export default function Question(props) {
                 })}
             </div>
             {/* only show when quiz submits */}
-            {props.numCorrectAnswers !== -1 && <ExplainButton />}
+            {props.numCorrectAnswers !== -1 && 
+            <ExplainButton 
+            questionText = {props.questionText}
+            answerText = {props.answersArr[props.answerIndex].answerText}
+            />}
             <hr />
         </div>
     )

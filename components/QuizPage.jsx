@@ -83,6 +83,7 @@ export default function QuizPage(props) {
                                 changeModeFunct = {props.changeModeFunct}
                                 changeUserAnswerIndex = {props.changeUserAnswerIndex}
                                 numCorrectAnswers = {numCorrectAnswers}
+                                answerIndex = {questionData.answerIndex}
                                 />
                             )
                         })
