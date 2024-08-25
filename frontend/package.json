@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "my-project": "file:..",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "Scrim-s00fsopfdn": "file:",
