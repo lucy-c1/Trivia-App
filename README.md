@@ -25,4 +25,4 @@ npm run start
 - Planned the main components of the project using github issues
 - Drew a [State tree](https://github.com/user-attachments/assets/9792b2d8-eee1-46ef-bd83-5ac28e216a70) to plan the interactions between the parent and child components.
 - Added responsiveness to the website using media queries.
-- Included AI to generate custom answer explanation when the user requests it and to ensure security of my api key, created a backend server
+- Included AI to generate custom answer explanation when the user requests it and to ensure security of my api key, created a backend server using Express
