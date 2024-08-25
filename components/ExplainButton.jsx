@@ -20,9 +20,20 @@ export default function ExplainButton(props) {
     }
 
     /* Will need 2 pieces of info: the question and the answer to the question */
-    function fetchAIResponse() {
+    async function fetchAIResponse() {
         const input = parseInput();
         console.log(input);
+
+        const response = await fetch('/ai/data', {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          });
+          const data = await response.json();
+          console.log(data);
+          setAIResponse(data);
     }
 
     /* will fetchAIResponse when isClicked is true */
