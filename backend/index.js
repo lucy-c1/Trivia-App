@@ -2,6 +2,8 @@
 const express = require("express");
 const Groq = require("groq-sdk");
 const cors = require("cors");
+const path = require('path');
+
 require("dotenv").config();
 
 // create necessary variables
@@ -9,8 +11,11 @@ const app = express();
 const groq = new Groq({
     apiKey: process.env.API_KEY
 });
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.use(cors());
+
+// Serve static files from the React app (Vite's `dist` folder)
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // define middleware - parse string into json for server to use
 app.use(express.json());
