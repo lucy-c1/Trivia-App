@@ -1,6 +1,6 @@
 # General description
 
-Quizz is a trivia quiz website that creates quiz questions based on user-selected settings. The questions are sourced from the [Open Trivia Database API](https://opentdb.com/api_config.php). The website is built with React and Bootstrap, and it saves previous quiz configurations using local storage. It uses [Llama AI](https://llama.meta.com/) to generate custom answer explanations for users.
+Quizz is a trivia quiz website that creates quiz questions based on user-selected settings. The questions are sourced from the [Open Trivia Database API](https://opentdb.com/api_config.php). The website is built with React and Bootstrap, and it saves previous quiz configurations using local storage. It uses [Llama AI](https://llama.meta.com/) to generate custom answer explanations for users and uses Express for backend to host a web server.
 
 # Running the project
 
