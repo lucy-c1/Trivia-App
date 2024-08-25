@@ -21,15 +21,18 @@ export default function ExplainButton(props) {
 
     /* Will need 2 pieces of info: the question and the answer to the question */
     async function fetchAIResponse() {
-        const input = parseInput();
+        const input = {
+            questionAnswer: parseInput()
+        };
         console.log(input);
 
         const response = await fetch('/ai/data', {
-            method: "GET",
+            method: "POST",
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
-            }
+            },
+            body: JSON.stringify(input) // remember that HTTP requests only accept Strings
           });
           const data = await response.json();
           console.log(data);
@@ -55,8 +58,7 @@ export default function ExplainButton(props) {
             
             {isClicked && 
             <p id = "aiResponseText">
-                {aiResponse}
-                This will eventually be AI generated response~ This will eventually be AI generated response~ This will eventually be AI generated response~
+                {aiResponse === "" ? "Waiting for AI..." : aiResponse}
             </p>
             }
         </div>
